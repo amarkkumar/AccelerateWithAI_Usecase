@@ -1,0 +1,16 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+silver,,,gold,store_region_product_category_sales,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+silver,stores_1_4_silver,store_id,gold,store_region_product_category_sales,store_id,Direct,Passthrough
+silver,stores_1_4_silver,store_name,gold,store_region_product_category_sales,store_name,Direct,Passthrough
+silver,stores_1_4_silver,region,gold,store_region_product_category_sales,store_region,Direct,Passthrough
+silver,sales_data_1_4_silver,sale_id,gold,store_region_product_category_sales,sale_id,Direct,Passthrough
+silver,sales_data_1_4_silver,store_id,gold,store_region_product_category_sales,sales_store_id,Direct,Join key to stores_1_4_silver.store_id
+silver,sales_data_1_4_silver,product_id,gold,store_region_product_category_sales,product_id,Direct,Join key to products_1_4_silver.product_id
+silver,sales_data_1_4_silver,quantity,gold,store_region_product_category_sales,quantity,Direct,Passthrough
+silver,sales_data_1_4_silver,sale_amount,gold,store_region_product_category_sales,sale_amount,Direct,Passthrough - required for total sales revenue calculation
+silver,sales_data_1_4_silver,sale_date,gold,store_region_product_category_sales,sale_date,Direct,Passthrough
+silver,products_1_4_silver,product_id,gold,store_region_product_category_sales,products_product_id,Direct,Join key from products table
+silver,products_1_4_silver,product_name,gold,store_region_product_category_sales,product_name,Direct,Passthrough
+silver,products_1_4_silver,category,gold,store_region_product_category_sales,product_category,Direct,Passthrough - required for grouping by product category
+silver,products_1_4_silver,price,gold,store_region_product_category_sales,product_price,Direct,Passthrough - may be used for revenue calculations
+silver,sales_data_1_4_silver,sale_amount,gold,store_region_product_category_sales,total_sales_revenue,Indirect,SUM(sale_amount) grouped by store_region and product_category to calculate total sales revenue per region per category

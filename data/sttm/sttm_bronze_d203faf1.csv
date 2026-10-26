@@ -1,0 +1,21 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+landing,products_1_4,product_id,bronze,products,product_id,DIRECT,CAST(product_id AS VARCHAR(50))
+landing,products_1_4,product_name,bronze,products,product_name,DIRECT,CAST(product_name AS VARCHAR(255))
+landing,products_1_4,category,bronze,products,category,DIRECT,CAST(category AS VARCHAR(100))
+landing,products_1_4,standard_price,bronze,products,standard_price,DIRECT,"CAST(standard_price AS DECIMAL(18,2))"
+landing,sales_data_1_4,transaction_id,bronze,sales_data,transaction_id,DIRECT,CAST(transaction_id AS VARCHAR(50))
+landing,sales_data_1_4,transaction_date,bronze,sales_data,transaction_date,DIRECT,CAST(transaction_date AS VARCHAR(50))
+landing,sales_data_1_4,store_id,bronze,sales_data,store_id,DIRECT,CAST(store_id AS VARCHAR(50))
+landing,sales_data_1_4,product_id,bronze,sales_data,product_id,DIRECT,CAST(product_id AS VARCHAR(50))
+landing,sales_data_1_4,product_name,bronze,sales_data,product_name,DIRECT,CAST(product_name AS VARCHAR(255))
+landing,sales_data_1_4,category,bronze,sales_data,category,DIRECT,CAST(category AS VARCHAR(100))
+landing,sales_data_1_4,quantity,bronze,sales_data,quantity,DIRECT,CAST(quantity AS INTEGER)
+landing,sales_data_1_4,unit_price,bronze,sales_data,unit_price,DIRECT,"CAST(unit_price AS DECIMAL(18,2))"
+landing,sales_data_1_4,total_amount,bronze,sales_data,total_amount,DIRECT,"CAST(total_amount AS DECIMAL(18,2))"
+landing,sales_data_1_4,customer_segment,bronze,sales_data,customer_segment,DIRECT,CAST(customer_segment AS VARCHAR(100))
+landing,sales_data_1_4,payment_method,bronze,sales_data,payment_method,DIRECT,CAST(payment_method AS VARCHAR(100))
+landing,stores_1_4,store_id,bronze,stores,store_id,DIRECT,CAST(store_id AS VARCHAR(50))
+landing,stores_1_4,store_name,bronze,stores,store_name,DIRECT,CAST(store_name AS VARCHAR(255))
+landing,stores_1_4,region,bronze,stores,region,DIRECT,CAST(region AS VARCHAR(100))
+landing,stores_1_4,city,bronze,stores,city,DIRECT,CAST(city AS VARCHAR(100))
+landing,stores_1_4,state,bronze,stores,state,DIRECT,CAST(state AS VARCHAR(10))

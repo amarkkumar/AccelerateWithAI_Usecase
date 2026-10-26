@@ -1,0 +1,16 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+silver,,,gold,product_sales_by_region,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+silver,stores_1_4_silver,store_id,gold,product_sales_by_region,store_id,Direct,Passthrough
+silver,stores_1_4_silver,region,gold,product_sales_by_region,store_region,Direct,Passthrough
+silver,products_1_4_silver,product_id,gold,product_sales_by_region,product_id,Direct,Passthrough
+silver,products_1_4_silver,category,gold,product_sales_by_region,product_category,Direct,Passthrough
+silver,products_1_4_silver,product_name,gold,product_sales_by_region,product_name,Direct,Passthrough
+silver,sales_data_1_4_silver,sale_id,gold,product_sales_by_region,sale_id,Direct,Passthrough
+silver,sales_data_1_4_silver,product_id,gold,product_sales_by_region,sales_product_id,Direct,Join key to products table
+silver,sales_data_1_4_silver,store_id,gold,product_sales_by_region,sales_store_id,Direct,Join key to stores table
+silver,sales_data_1_4_silver,quantity,gold,product_sales_by_region,quantity_sold,Direct,Passthrough
+silver,sales_data_1_4_silver,price,gold,product_sales_by_region,unit_price,Direct,Passthrough
+silver,sales_data_1_4_silver,total_amount,gold,product_sales_by_region,sales_revenue,Direct,Passthrough or calculated as quantity * price
+silver,sales_data_1_4_silver,sale_date,gold,product_sales_by_region,sale_date,Direct,Passthrough
+silver,sales_data_1_4_silver,,gold,product_sales_by_region,total_sales_revenue_by_category_region,Indirect,"SUM(sales_revenue) GROUP BY product_category, store_region"
+silver,sales_data_1_4_silver,,gold,product_sales_by_region,rank_by_region,Indirect,RANK() OVER (PARTITION BY store_region ORDER BY total_sales_revenue_by_category_region DESC)

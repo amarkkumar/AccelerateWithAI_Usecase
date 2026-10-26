@@ -1,0 +1,19 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+,,,gold,pipeline_execution_report,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+silver,products 1 4_silver,_source_file,gold,pipeline_execution_report,source_file_path,Direct,Passthrough of source file path
+silver,products 1 4_silver,_load_timestamp,gold,pipeline_execution_report,load_timestamp,Direct,Passthrough of load timestamp
+silver,products 1 4_silver,_source_file,gold,pipeline_execution_report,source_filename,Indirect,Extract filename from full path using path parsing function
+silver,products 1 4_silver,,gold,pipeline_execution_report,file_status,Indirect,Check if file exists at source path; return 'FOUND' or 'NOT_FOUND'
+silver,products 1 4_silver,,gold,pipeline_execution_report,pipeline_stage,Indirect,Constant value 'SILVER' indicating the pipeline stage
+silver,sales_data 1 4_silver,_source_file,gold,pipeline_execution_report,source_file_path,Direct,Passthrough of source file path
+silver,sales_data 1 4_silver,_load_timestamp,gold,pipeline_execution_report,load_timestamp,Direct,Passthrough of load timestamp
+silver,sales_data 1 4_silver,_source_file,gold,pipeline_execution_report,source_filename,Indirect,Extract filename from full path using path parsing function
+silver,sales_data 1 4_silver,,gold,pipeline_execution_report,file_status,Indirect,Check if file exists at source path; return 'FOUND' or 'NOT_FOUND'
+silver,sales_data 1 4_silver,,gold,pipeline_execution_report,pipeline_stage,Indirect,Constant value 'SILVER' indicating the pipeline stage
+silver,stores 1 4_silver,_source_file,gold,pipeline_execution_report,source_file_path,Direct,Passthrough of source file path
+silver,stores 1 4_silver,_load_timestamp,gold,pipeline_execution_report,load_timestamp,Direct,Passthrough of load timestamp
+silver,stores 1 4_silver,_source_file,gold,pipeline_execution_report,source_filename,Indirect,Extract filename from full path using path parsing function
+silver,stores 1 4_silver,,gold,pipeline_execution_report,file_status,Indirect,Check if file exists at source path; return 'FOUND' or 'NOT_FOUND'
+silver,stores 1 4_silver,,gold,pipeline_execution_report,pipeline_stage,Indirect,Constant value 'SILVER' indicating the pipeline stage
+silver,"products 1 4_silver,sales_data 1 4_silver,stores 1 4_silver",,gold,pipeline_execution_report,execution_date,Indirect,Extract date from load_timestamp for grouping pipeline executions
+silver,"products 1 4_silver,sales_data 1 4_silver,stores 1 4_silver",,gold,pipeline_execution_report,report_generated_timestamp,Indirect,Current timestamp when the gold report is generated

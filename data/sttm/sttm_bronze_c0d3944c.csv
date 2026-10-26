@@ -1,0 +1,21 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+landing,products_1_4,product_id,bronze,products,product_id,direct,CAST(product_id AS STRING)
+landing,products_1_4,product_name,bronze,products,product_name,direct,CAST(product_name AS STRING)
+landing,products_1_4,category,bronze,products,category,direct,CAST(category AS STRING)
+landing,products_1_4,standard_price,bronze,products,standard_price,direct,"CAST(standard_price AS DECIMAL(10,2))"
+landing,sales_data_1_4,transaction_id,bronze,sales_data,transaction_id,direct,CAST(transaction_id AS STRING)
+landing,sales_data_1_4,transaction_date,bronze,sales_data,transaction_date,direct,CAST(transaction_date AS STRING)
+landing,sales_data_1_4,store_id,bronze,sales_data,store_id,direct,CAST(store_id AS STRING)
+landing,sales_data_1_4,product_id,bronze,sales_data,product_id,direct,CAST(product_id AS STRING)
+landing,sales_data_1_4,product_name,bronze,sales_data,product_name,direct,CAST(product_name AS STRING)
+landing,sales_data_1_4,category,bronze,sales_data,category,direct,CAST(category AS STRING)
+landing,sales_data_1_4,quantity,bronze,sales_data,quantity,direct,CAST(quantity AS INTEGER)
+landing,sales_data_1_4,unit_price,bronze,sales_data,unit_price,direct,"CAST(unit_price AS DECIMAL(10,2))"
+landing,sales_data_1_4,total_amount,bronze,sales_data,total_amount,direct,"CAST(total_amount AS DECIMAL(10,2))"
+landing,sales_data_1_4,customer_segment,bronze,sales_data,customer_segment,direct,CAST(customer_segment AS STRING)
+landing,sales_data_1_4,payment_method,bronze,sales_data,payment_method,direct,CAST(payment_method AS STRING)
+landing,stores_1_4,store_id,bronze,stores,store_id,direct,CAST(store_id AS STRING)
+landing,stores_1_4,store_name,bronze,stores,store_name,direct,CAST(store_name AS STRING)
+landing,stores_1_4,region,bronze,stores,region,direct,CAST(region AS STRING)
+landing,stores_1_4,city,bronze,stores,city,direct,CAST(city AS STRING)
+landing,stores_1_4,state,bronze,stores,state,direct,CAST(state AS STRING)

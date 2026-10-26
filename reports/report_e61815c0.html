@@ -1,0 +1,132 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Executive Report - e61815c0</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f5;
+                color: #333;
+            }
+            .header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 30px;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+            .header h1 { margin: 0; font-size: 32px; }
+            .header p { margin: 10px 0 0 0; opacity: 0.9; }
+            .section {
+                background: white;
+                padding: 25px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .section h2 {
+                color: #667eea;
+                border-bottom: 3px solid #667eea;
+                padding-bottom: 10px;
+                margin-top: 0;
+            }
+            .answer-section {
+                background: #e8f4f8;
+                padding: 20px;
+                border-radius: 8px;
+                border-left: 4px solid #28a745;
+            }
+            .answer-section p { margin: 0; line-height: 1.6; font-size: 16px; color: #333; }
+            .approach-section { margin: 20px 0; }
+            .approach-section h3 { color: #667eea; font-size: 16px; margin: 20px 0 10px 0; }
+            .code-block {
+                background: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                padding: 15px;
+                overflow-x: auto;
+                font-family: 'Courier New', monospace;
+                font-size: 13px;
+                line-height: 1.4;
+                color: #333;
+                margin: 0 0 15px 0;
+            }
+            .code-block code { color: #667eea; }
+            .approach-section p { line-height: 1.6; color: #555; margin: 0 0 15px 0; }
+            .chart-container { margin: 20px 0; }
+            .footer {
+                text-align: center;
+                color: #999;
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>&#128202; Executive Report</h1>
+            <p><strong>Business Question:</strong> Report file not found. Please check the pipeline execution.</p>
+        </div>
+        <div class="section">
+            <h2>&#9989; Answer</h2>
+            
+    <div class="answer-section">
+        <p>The Gold layer currently contains only pipeline execution metadata (216 records across 3 source files) tracking 20 products, 186 sales transactions, and 10 stores. The actual retail business data tables (sales_fact, products_dim, stores_dim) required for sales performance analysis, product metrics, and store comparisons are NOT present in the Gold layer. The pipeline has successfully ingested data from landing zone on 2026-10-22 at 14:05:03 UTC, but business-ready analytical tables have not been created.</p>
+    </div>
+    
+        </div>
+        <div class="section">
+            <h2>&#128202; Approach &amp; Query</h2>
+            
+    <div class="approach-section">
+        <h3>Query Code</h3>
+        <pre class="code-block"><code>
+-- Overall pipeline summary
+SELECT 
+    COUNT(*) AS total_records_in_gold,
+    COUNT(DISTINCT source_filename) AS total_source_files,
+    MIN(load_timestamp) AS pipeline_start_time,
+    MAX(load_timestamp) AS pipeline_end_time,
+    COUNT(DISTINCT 
+        CASE 
+            WHEN &quot;pk_products 1 4_bronze_silver_id&quot; IS NOT NULL THEN &quot;pk_products 1 4_bronze_silver_id&quot;
+        END
+    ) AS unique_products,
+    COUNT(DISTINCT 
+        CASE 
+            WHEN &quot;pk_sales_data 1 4_bronze_silver_id&quot; IS NOT NULL THEN &quot;pk_sales_data 1 4_bronze_silver_id&quot;
+        END
+    ) AS unique_sales_transactions,
+    COUNT(DISTINCT 
+        CASE 
+            WHEN &quot;pk_stores 1 4_bronze_silver_id&quot; IS NOT NULL THEN &quot;pk_stores 1 4_bronze_silver_id&quot;
+        END
+    ) AS unique_stores
+FROM pipeline_execution_report
+</code></pre>
+        <h3>Query Description</h3>
+        <p>Queried the pipeline_execution_report table using SQL aggregations to identify: (1) data source types and record counts via CASE statements on foreign key columns, (2) source file details and processing timestamps, (3) overall pipeline statistics including unique entity counts. The analysis confirms data was successfully ingested but not transformed into analytical Gold tables.</p>
+    </div>
+    
+        </div>
+        <div class="section">
+            <h2>&#128201; Visual Evidence</h2>
+            <div class="chart-container">
+                <p>No charts generated.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Generated by IDAMP (Intent-Driven Agentic Medallion Pipeline)</p>
+            <p>Report Date: 2026-10-22 19:41:57</p>
+        </div>
+    </body>
+    </html>
+    
